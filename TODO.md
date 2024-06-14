@@ -1,0 +1,2 @@
+- Solucionar rutas para la creacion de nuevas imágenes
+- Solucionar recursos estaticos para el consumo por fetching
