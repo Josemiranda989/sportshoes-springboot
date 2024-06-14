@@ -15,26 +15,30 @@ export default function CreateShoeForm() {
     formData.append("quantity", quantity);
     formData.append("image", image);
 
-    try {
-      const response = await fetch("http://localhost:8080/shoes", {
-        method: "POST",
-        body: formData,
+    fetch("http://localhost:8080/shoes", {
+      method: "POST",
+      body: formData,
+      // No necesitas establecer el encabezado Content-Type
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Shoe created successfully");
+          //hacer un reload luego de 3 segundos
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } else {
+          console.error("Failed to create shoe");
+        }
+      })
+      .catch((error) => {
+        console.error("Error creating shoe:", error);
       });
-
-      if (response.ok) {
-        console.log("Shoe created successfully");
-        window.location.reload();
-      } else {
-        console.error("Failed to create shoe");
-      }
-    } catch (error) {
-      console.error("Error creating shoe:", error);
-    }
   };
 
   return (
     <div className="container">
-      <h2 className="my-4">New Shoes</h2>
+      <h2 className="my-4">New Shoe</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Name:</label>

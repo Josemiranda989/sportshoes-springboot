@@ -1,2 +1,1 @@
-- Solucionar rutas para la creacion de nuevas imágenes
-- Solucionar recursos estaticos para el consumo por fetching
+- Funciona todo perfecto, el guardado de la imagen tiene un pequeño delay
