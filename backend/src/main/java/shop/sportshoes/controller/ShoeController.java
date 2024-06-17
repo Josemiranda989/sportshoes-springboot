@@ -9,6 +9,7 @@ import shop.sportshoes.model.ShoeDto;
 import shop.sportshoes.repository.ShoeRepository;
 import shop.sportshoes.service.ShoeService;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,9 @@ public class ShoeController {
     @GetMapping
     public ResponseEntity<?> getAllShoes() {
         try {
-            return ResponseEntity.ok(shoeService.getAllShoes());
+            List<Shoe> shoes = shoeService.getAllShoes();
+            System.out.println("SHOES" + shoes);
+            return ResponseEntity.ok("TEST");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
