@@ -32,7 +32,7 @@ export default function ShoesList() {
                 <strong>{shoe.name}</strong> - {shoe.size} - {shoe.quantity}
               </div>
               <img
-                src={`http://localhost:8080${shoe.imageUrl}`}
+                src={`${shoe.imageUrl}`}
                 alt={shoe.name}
                 style={{ maxWidth: "100px" }}
               />
