@@ -24,8 +24,7 @@ public class ShoeController {
     public ResponseEntity<?> getAllShoes() {
         try {
             List<Shoe> shoes = shoeService.getAllShoes();
-            System.out.println("SHOES" + shoes);
-            return ResponseEntity.ok("TEST");
+            return ResponseEntity.ok(shoes);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -33,7 +32,6 @@ public class ShoeController {
 
     @PostMapping
     public ResponseEntity<String> createShoe(@ModelAttribute ShoeDto shoeDto) {
-        System.out.println(shoeDto.toString());
         try {
             return ResponseEntity.ok(shoeService.saveImageStorage(shoeDto));
         } catch (Exception e) {
