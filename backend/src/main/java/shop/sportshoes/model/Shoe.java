@@ -17,46 +17,32 @@ public class Shoe {
     private int quantity;
     private String imageUrl;
 
-
-
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Shoe(String name, int size, int quantity, String imageUrl) {
         this.name = name;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
         this.size = size;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Shoe() {
+    }
+
+    public Shoe(Long id, String name, int size, int quantity, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.size = size;
+        this.quantity = quantity;
+        this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Shoe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", size=" + size +
+                ", quantity=" + quantity +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
     }
 }
