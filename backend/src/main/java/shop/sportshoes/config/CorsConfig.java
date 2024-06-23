@@ -22,9 +22,10 @@ public class CorsConfig {
             }
 
             @Override
+            //Ruteo para acceder al directorio de imagenes desde la url del servicio
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 registry.addResourceHandler("/images/**")
-                        .addResourceLocations("classpath:/static/images/");
+                        .addResourceLocations("file:./images/");
             }
         };
     }
