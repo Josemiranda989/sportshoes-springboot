@@ -24,7 +24,8 @@ public class ShoeService {
     @Autowired
     private ShoeRepository shoeRepository;
 
-    private static final Path ROOT_LOCATION = Paths.get("src/main/resources/static/images");
+    //Ruta relativa donde se van a almacenar las iamgenes
+    private static final Path ROOT_LOCATION = Paths.get("./images");
 
     private String sanitizeFilename(String filename) {
         return filename.replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
@@ -83,6 +84,7 @@ public class ShoeService {
         return fullPath;
     }
 
+    //Metodo para obtener la url del servicio e incluirlo en el path de la imagen
     private String getBaseUrl() {
         return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
     }

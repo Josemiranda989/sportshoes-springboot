@@ -2,6 +2,7 @@ package shop.sportshoes.model;
 
 import org.springframework.web.multipart.MultipartFile;
 
+//Patron de diseño para manipular los datos de una clase sin necesidad de incluir todas sus propiedades
 public class ShoeDto {
 
     private String name;
