@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuracion del log4j, con nivel de estado WARN y monitoreo cada 30 segundos -->
+<Configuration status="WARN" monitorInterval="30">
+
+    <!-- Propiedades de logging -->
+    <Properties>
+        <!-- Patron para el formato del log, incluyendo fecha, hora, nivel y mensaje -->
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+        <!-- Directorio raiz donde se guardaran los archivos de log -->
+        <Property name="APP_LOG_ROOT">c:/temp</Property>
+    </Properties>
+
+    <Appenders>
+
+        <!-- Consola Appender, para mostrar logs en la consola -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <!-- Uso del patron definido en LOG_PATTERN -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- File Appenders segun sea necesario -->
+        <!-- Appender para logs de framework -->
+        <RollingFile name="frameworkLog" fileName="${APP_LOG_ROOT}/app-framework.log"
+                     filePattern="${APP_LOG_ROOT}/app-framework-%d{yyyy-MM-dd}-%i.log">
+            <!-- Filtro para incluir solo logs de nivel ERROR -->
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- Uso del patron definido en LOG_PATTERN -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- Politica de rotacion basada en el tamaño del archivo -->
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <!-- Estrategia de rotacion por defecto, con un maximo de 10 archivos -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <!-- Appender para logs de debug -->
+        <RollingFile name="debugLog" fileName="${APP_LOG_ROOT}/app-debug.log"
+                     filePattern="${APP_LOG_ROOT}/app-debug-%d{yyyy-MM-dd}-%i.log">
+            <!-- Filtro para incluir solo logs de nivel DEBUG -->
+            <LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- Uso del patron definido en LOG_PATTERN -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- Politica de rotacion basada en el tamaño del archivo -->
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <!-- Estrategia de rotacion por defecto, con un maximo de 10 archivos -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <!-- Appender para logs de informacion -->
+        <RollingFile name="infoLog" fileName="${APP_LOG_ROOT}/app-info.log"
+                     filePattern="${APP_LOG_ROOT}/app-info-%d{yyyy-MM-dd}-%i.log" >
+            <!-- Filtro para incluir solo logs de nivel INFO -->
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- Uso del patron definido en LOG_PATTERN -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- Politica de rotacion basada en el tamaño del archivo -->
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <!-- Estrategia de rotacion por defecto, con un maximo de 10 archivos -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <!-- Appender para logs de errores -->
+        <RollingFile name="errorLog" fileName="${APP_LOG_ROOT}/app-error.log"
+                     filePattern="${APP_LOG_ROOT}/app-error-%d{yyyy-MM-dd}-%i.log" >
+            <!-- Filtro para incluir solo logs de nivel ERROR -->
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- Uso del patron definido en LOG_PATTERN -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- Politica de rotacion basada en el tamaño del archivo -->
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <!-- Estrategia de rotacion por defecto, con un maximo de 10 archivos -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <!-- Appender para logs de rendimiento -->
+        <RollingFile name="perfLog" fileName="${APP_LOG_ROOT}/app-perf.log"
+                     filePattern="${APP_LOG_ROOT}/app-perf-%d{yyyy-MM-dd}-%i.log" >
+            <!-- Uso del patron definido en LOG_PATTERN -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- Politica de rotacion basada en el tamaño del archivo -->
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <!-- Estrategia de rotacion por defecto, con un maximo de 1 archivo -->
+            <DefaultRolloverStrategy max="1"/>
+        </RollingFile>
+
+        <!-- Appender para logs de traza -->
+        <RollingFile name="traceLog" fileName="${APP_LOG_ROOT}/app-trace.log"
+                     filePattern="${APP_LOG_ROOT}/app-trace-%d{yyyy-MM-dd}-%i.log" >
+            <!-- Uso del patron definido en LOG_PATTERN -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- Politica de rotacion basada en el tamano del archivo -->
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <!-- Estrategia de rotacion por defecto, con un maximo de 1 archivo -->
+            <DefaultRolloverStrategy max="1"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <!-- Logger para la aplicacion shop.sportshoes con nivel TRACE -->
+        <Logger name="shop.sportshoes" additivity="false" level="trace">
+            <!-- Referencia al appender de logs de traza -->
+            <AppenderRef ref="traceLog" />
+            <!-- Referencia al appender de consola -->
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- Logger para la aplicacion shop.sportshoes con nivel DEBUG -->
+        <Logger name="shop.sportshoes" additivity="false" level="debug">
+            <!-- Referencia al appender de logs de debug -->
+            <AppenderRef ref="debugLog" />
+            <!-- Referencia al appender de logs de informacion -->
+            <AppenderRef ref="infoLog"  />
+            <!-- Referencia al appender de logs de errores -->
+            <AppenderRef ref="errorLog" />
+            <!-- Referencia al appender de consola -->
+            <AppenderRef ref="Console"  />
+        </Logger>
+
+        <!-- Logger para la aplicacion shop.sportshoes con nivel INFO -->
+        <Logger name="shop.sportshoes" additivity="false" level="info">
+            <!-- Referencia al appender de logs de rendimiento -->
+            <AppenderRef ref="perfLog" />
+            <!-- Referencia al appender de consola -->
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <!-- Logger raiz con nivel WARN -->
+        <Root level="warn">
+            <!-- Referencia al appender de consola -->
+            <AppenderRef ref="Console"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>
