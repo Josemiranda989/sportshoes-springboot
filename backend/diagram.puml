@@ -1,0 +1,77 @@
+@startuml
+package config {
+    class CorsConfig {
+        + WebMvcConfigurer corsConfigurer()
+    }
+}
+
+package model {
+    class Shoe {
+        - Long id
+        - String name
+        - int size
+        - int quantity
+        - String imageUrl
+
+        + Shoe(String name, int size, int quantity, String imageUrl)
+        + Shoe()
+        + Shoe(Long id, String name, int size, int quantity, String imageUrl)
+        + Long getId()
+        + String getName()
+        + int getSize()
+        + int getQuantity()
+        + String getImageUrl()
+        + void setImageUrl(String imageUrl)
+        + String toString()
+    }
+
+    class ShoeDto {
+        - String name
+        - Integer size
+        - Integer quantity
+        - MultipartFile image
+
+        + ShoeDto(String name, Integer size, Integer quantity, MultipartFile image)
+        + String getName()
+        + Integer getSize()
+        + Integer getQuantity()
+        + MultipartFile getImage()
+        + String toString()
+    }
+}
+
+package repository {
+    interface ShoeRepository {
+        + List<Shoe> findAll()
+        + Shoe save(Shoe shoe)
+    }
+}
+
+package service {
+    class ShoeService {
+        - ShoeRepository shoeRepository
+        - static final Path ROOT_LOCATION
+
+        + List<Shoe> getAllShoes()
+        + String saveImageStorage(ShoeDto shoeDto)
+        + String sanitizeFilename(String filename)
+        + String getBaseUrl()
+    }
+}
+
+package controller {
+    class ShoeController {
+        + ResponseEntity<?> getAllShoes()
+        + ResponseEntity<String> createShoe(ShoeDto shoeDto)
+    }
+}
+
+repository::ShoeRepository --|> JpaRepository
+JpaRepository <|.. Shoe
+
+controller::ShoeController --> service::ShoeService : usa
+service::ShoeService --> repository::ShoeRepository : usa
+repository::ShoeRepository --> model::Shoe : contiene
+controller::ShoeController --> model::ShoeDto : usa
+config::CorsConfig --> WebMvcConfigurer
+@enduml
