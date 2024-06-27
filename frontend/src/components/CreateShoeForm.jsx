@@ -37,45 +37,48 @@ export default function CreateShoeForm() {
   };
 
   return (
-    <div className="container">
-      <h2 className="my-4">New Shoe</h2>
+    <div className="container mx-auto px-4">
+      <h2 className="my-4 text-2xl font-semibold">New Shoe</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Name:</label>
+        <div className="mb-4">
+          <label className="block mb-2">Name:</label>
           <input
             type="text"
-            className="form-control"
+            className="w-full py-2 px-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Size:</label>
+        <div className="mb-4">
+          <label className="block mb-2">Size:</label>
           <input
             type="text"
-            className="form-control"
+            className="w-full py-2 px-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={size}
             onChange={(e) => setSize(e.target.value)}
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Quantity:</label>
+        <div className="mb-4">
+          <label className="block mb-2">Quantity:</label>
           <input
             type="number"
-            className="form-control"
+            className="w-full py-2 px-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Image:</label>
+        <div className="mb-4">
+          <label className="block mb-2">Image:</label>
           <input
             type="file"
-            className="form-control"
+            className="w-full py-2 px-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={(e) => setImage(e.target.files[0])}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           Create Shoe
         </button>
       </form>

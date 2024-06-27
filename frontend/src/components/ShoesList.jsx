@@ -6,9 +6,8 @@ export default function ShoesList() {
   useEffect(() => {
     /* Consumo de Api para obtener todos los zapatos */
     fetch("http://localhost:8080/shoes")
-      .then((res) => res.json(res))
+      .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         setShoes(data);
       })
       .catch((error) => {
@@ -17,16 +16,16 @@ export default function ShoesList() {
   }, []);
 
   return (
-    <div className="container">
-      <h2 className="my-4">Shoes List</h2>
-      <ul className="list-group">
+    <div className="container mx-auto px-4">
+      <h2 className="my-4 text-2xl font-semibold">Shoes List</h2>
+      <ul className="divide-y divide-gray-200">
         {shoes.length === 0 ? (
-          <p>No shoes available</p>
+          <p className="py-4">No shoes available</p>
         ) : (
           shoes.map((shoe) => (
             <li
               key={shoe.id}
-              className="list-group-item d-flex justify-content-between align-items-center"
+              className="flex justify-between items-center py-4"
             >
               <div className="text-primary">
                 <strong>{shoe.name}</strong> - {shoe.size} - {shoe.quantity}
@@ -34,6 +33,7 @@ export default function ShoesList() {
               <img
                 src={`${shoe.imageUrl}`}
                 alt={shoe.name}
+                className="max-w-full h-auto"
                 style={{ maxWidth: "100px" }}
               />
             </li>
