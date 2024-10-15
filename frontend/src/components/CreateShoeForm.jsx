@@ -18,12 +18,10 @@ export default function CreateShoeForm({ setCanGetShoesToTrue }) {
     fetch(import.meta.env.VITE_URL_API, {
       method: "POST",
       body: formData,
-      // No necesitas establecer el encabezado Content-Type
     })
       .then((response) => {
         if (response.ok) {
           console.log("Shoe created successfully");
-          //hacer un reload luego de 3 segundos
           setCanGetShoesToTrue();
         } else {
           console.error("Failed to create shoe");
@@ -60,7 +58,6 @@ export default function CreateShoeForm({ setCanGetShoesToTrue }) {
           <label className="block mb-2">Quantity:</label>
           <input
             type="number"
-            className="w-full py-2 px-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
