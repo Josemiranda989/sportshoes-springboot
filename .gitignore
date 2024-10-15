@@ -76,4 +76,4 @@ dist-ssr
 *.sw?
 
 ### Imagenes ###
-backend/src/main/resources/static/images
+images

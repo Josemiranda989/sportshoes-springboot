@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CreateShoeForm() {
+export default function CreateShoeForm({ setCanGetShoesToTrue }) {
   const [name, setName] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -15,7 +15,7 @@ export default function CreateShoeForm() {
     formData.append("quantity", quantity);
     formData.append("image", image);
 
-    fetch("http://localhost:8080/shoes", {
+    fetch(import.meta.env.VITE_URL_API, {
       method: "POST",
       body: formData,
       // No necesitas establecer el encabezado Content-Type
@@ -24,9 +24,7 @@ export default function CreateShoeForm() {
         if (response.ok) {
           console.log("Shoe created successfully");
           //hacer un reload luego de 3 segundos
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          setCanGetShoesToTrue();
         } else {
           console.error("Failed to create shoe");
         }

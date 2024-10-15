@@ -1,19 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function ShoesList() {
-  const [shoes, setShoes] = useState([]);
-
-  useEffect(() => {
-    /* Consumo de Api para obtener todos los zapatos */
-    fetch("http://localhost:8080/shoes")
-      .then((res) => res.json())
-      .then((data) => {
-        setShoes(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los productos:", error);
-      });
-  }, []);
+export default function ShoesList({shoes}) {
+ 
 
   return (
     <div className="container mx-auto px-4">
